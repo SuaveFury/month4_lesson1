@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.month4_lesson1.databinding.TaskItemBinding
-import kotlinx.coroutines.selects.whileSelect
+
 
 class TaskAdapter :  RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 

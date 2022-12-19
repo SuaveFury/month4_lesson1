@@ -30,13 +30,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.profile_fragment, R.id.newTaskFragment
             )
         )
+
+        navController.navigate(R.id.onBoardingFragment)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if (destination.id == R.id.newTaskFragment){
+            if (destination.id == R.id.newTaskFragment|| destination.id == R.id.onBoardingFragment){
                 navView.visibility = View.GONE
-            } else navView.visibility = View.VISIBLE
+
+            }
+            if (destination.id == R.id.onBoardingFragment){
+                supportActionBar?.hide()
+        }
+            else navView.visibility = View.VISIBLE
 
         }
     }
