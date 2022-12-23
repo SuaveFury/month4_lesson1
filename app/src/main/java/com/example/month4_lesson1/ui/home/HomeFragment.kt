@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.month4_lesson1.R
 import com.example.month4_lesson1.databinding.FragmentHomeBinding
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -56,10 +57,8 @@ class HomeFragment : Fragment() {
 
 
         setFragmentResultListener("new_task"){key, bundle ->
-
-            val title = bundle.get("title")
-            val description = bundle.get("desc")
-            taskAdapter.addTask(TaskModel(title.toString(), description.toString()))
+            val task = bundle.getSerializable("data") as TaskModel
+            taskAdapter.addTask(task)
 
 
         }

@@ -1,5 +1,6 @@
 package com.example.month4_lesson1.ui.onBoarding
 
+import androidx.core.graphics.toColor
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

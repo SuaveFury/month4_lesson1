@@ -3,6 +3,7 @@ package com.example.month4_lesson1.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.month4_lesson1.databinding.TaskItemBinding
 
@@ -14,6 +15,7 @@ private var taskLIst = arrayListOf<TaskModel>()
     fun addTask(taskModel: TaskModel){
         taskLIst.add(0,taskModel)
         notifyItemChanged(0)
+
     }
 
 
@@ -23,6 +25,7 @@ private var taskLIst = arrayListOf<TaskModel>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.bind(taskLIst[position])
+
     }
 
     override fun getItemCount(): Int = taskLIst.size
@@ -33,6 +36,7 @@ private var taskLIst = arrayListOf<TaskModel>()
         fun bind(taskModel: TaskModel){
             binding.tvTitle.text = taskModel.title
             binding.tvDesc.text = taskModel.description
+            binding.imgItem.setImageURI(taskModel.imgUri.toUri())
         }
 
 

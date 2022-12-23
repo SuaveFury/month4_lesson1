@@ -30,6 +30,7 @@ class OnBoardingFragment : Fragment()  {
         binding.wormDotsIndicator.setViewPager(binding.vpBoard)
 
 
+
     }
 
     private fun onSkipClick(){

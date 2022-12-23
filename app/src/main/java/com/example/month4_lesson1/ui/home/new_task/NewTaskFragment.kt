@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.month4_lesson1.databinding.FragmentNewTaskBinding
+import com.example.month4_lesson1.ui.home.TaskModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,6 +20,11 @@ import java.util.*
 
 class NewTaskFragment : Fragment() {
     private lateinit var binding: FragmentNewTaskBinding
+    var imgUri:String = ""
+    var mGetContent: ActivityResultLauncher<String> = registerForActivityResult(
+        ActivityResultContracts.GetContent(), { uri-> binding.imageTask.setImageURI(uri)
+        imgUri = uri.toString()})
+
 
 
     override fun onCreateView(
@@ -35,13 +43,18 @@ class NewTaskFragment : Fragment() {
     }
 
 
-
-
     private fun initListeners() {
         binding.btnSave.setOnClickListener{
-            setFragmentResult("new_task", bundleOf("title" to binding.etTitle.text.toString(),
-            "desc" to binding.etDesc.text.toString()))
+            setFragmentResult("new_task", bundleOf("data" to TaskModel(
+                binding.etTitle.text.toString(),
+                binding.etDesc.text.toString(),
+                imgUri
+            )))
             findNavController().navigateUp()
+
+        }
+        binding.imageTask.setOnClickListener{
+            mGetContent.launch("image/*")
         }
     }
 
@@ -50,6 +63,7 @@ class NewTaskFragment : Fragment() {
         binding.btnTime.setOnClickListener {
 showDataRangePicker()
         }
+
     }
 
     private fun showDataRangePicker() {
