@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.month4_lesson1.App
 import com.example.month4_lesson1.R
 import com.example.month4_lesson1.databinding.FragmentHomeBinding
 import java.util.*
@@ -50,19 +51,11 @@ class HomeFragment : Fragment() {
         binding.rvHome.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = taskAdapter
-
-
+        }
+        val listOfTasks = App.db.dao().getAllTasks()
+        taskAdapter.addTasks(listOfTasks)
         }
 
-
-
-        setFragmentResultListener("new_task"){key, bundle ->
-            val task = bundle.getSerializable("data") as TaskModel
-            taskAdapter.addTask(task)
-
-
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

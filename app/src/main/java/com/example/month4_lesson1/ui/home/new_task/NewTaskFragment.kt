@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.example.month4_lesson1.App
 import com.example.month4_lesson1.databinding.FragmentNewTaskBinding
 import com.example.month4_lesson1.ui.home.TaskModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -45,11 +46,13 @@ class NewTaskFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnSave.setOnClickListener{
-            setFragmentResult("new_task", bundleOf("data" to TaskModel(
-                binding.etTitle.text.toString(),
-                binding.etDesc.text.toString(),
-                imgUri
-            )))
+            App.db.dao().insert(
+                TaskModel(
+                  title =  binding.etTitle.text.toString(),
+                   description =  binding.etDesc.text.toString(),
+                    imgUri = imgUri
+                )
+            )
             findNavController().navigateUp()
 
         }

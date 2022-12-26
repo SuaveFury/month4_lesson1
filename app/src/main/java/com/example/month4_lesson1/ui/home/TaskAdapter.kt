@@ -6,29 +6,29 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.month4_lesson1.databinding.TaskItemBinding
+import com.example.month4_lesson1.ui.utils.loadImage
 
 
 class TaskAdapter :  RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
-private var taskLIst = arrayListOf<TaskModel>()
+private var taskList = arrayListOf<TaskModel>()
 
-    fun addTask(taskModel: TaskModel){
-        taskLIst.add(0,taskModel)
-        notifyItemChanged(0)
-
+    fun addTasks(list: List<TaskModel>){
+        taskList.clear()
+        taskList.addAll(list)
+        notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return  ViewHolder(TaskItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(taskLIst[position])
+    holder.bind(taskList[position])
 
     }
 
-    override fun getItemCount(): Int = taskLIst.size
+    override fun getItemCount(): Int = taskList.size
 
 
     inner class ViewHolder(private var binding: TaskItemBinding): RecyclerView.ViewHolder(binding.root){
@@ -36,9 +36,9 @@ private var taskLIst = arrayListOf<TaskModel>()
         fun bind(taskModel: TaskModel){
             binding.tvTitle.text = taskModel.title
             binding.tvDesc.text = taskModel.description
-            binding.imgItem.setImageURI(taskModel.imgUri.toUri())
+//            binding.imgItem.setImageURI(taskModel.imgUri.toUri())
+            binding.imgItem.loadImage(taskModel.imgUri)
+
         }
-
-
     }
 }
