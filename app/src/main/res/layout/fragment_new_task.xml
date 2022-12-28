@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-
+    android:background="@color/back"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.new_task.NewTaskFragment">
     
@@ -15,6 +15,7 @@
         android:hint="Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:boxStrokeColor="@color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,6 +37,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_layout_title"
+        app:boxStrokeColor="@color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,6 +63,7 @@
         android:textSize="20sp"
         android:paddingVertical="12dp"
         app:cornerRadius="12dp"
+        android:backgroundTint="@color/black"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -75,6 +78,7 @@
         android:textSize="20sp"
         android:paddingVertical="12dp"
         app:cornerRadius="12dp"
+        android:backgroundTint="@color/black"
         />
 
     <TextView

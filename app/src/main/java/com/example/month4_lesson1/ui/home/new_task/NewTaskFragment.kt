@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.month4_lesson1.App
 import com.example.month4_lesson1.databinding.FragmentNewTaskBinding
@@ -42,6 +40,7 @@ class NewTaskFragment : Fragment() {
 
 
     }
+
 
 
     private fun initListeners() {
@@ -104,6 +103,7 @@ showDataRangePicker()
             Locale.getDefault())
         return format.format(date)
     }
+
 
 
 }

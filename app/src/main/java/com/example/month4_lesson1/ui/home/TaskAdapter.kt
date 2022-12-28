@@ -1,10 +1,12 @@
 package com.example.month4_lesson1.ui.home
 
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.example.month4_lesson1.App
 import com.example.month4_lesson1.databinding.TaskItemBinding
 import com.example.month4_lesson1.ui.utils.loadImage
 
@@ -38,7 +40,24 @@ private var taskList = arrayListOf<TaskModel>()
             binding.tvDesc.text = taskModel.description
 //            binding.imgItem.setImageURI(taskModel.imgUri.toUri())
             binding.imgItem.loadImage(taskModel.imgUri)
+            itemView.setOnLongClickListener{
+                val builder = AlertDialog.Builder(itemView.context)
+                with(builder){
+                    setTitle("Вы точно хотите удалить '${taskModel.title}'")
+                    setPositiveButton("Да"){dialog , which->
+                        App.db.dao().deleteTask(taskModel)
+                        taskList.clear()
+                        taskList.addAll(App.db.dao().getAllTasks())
+                        notifyDataSetChanged()
+                    }
+                    setNegativeButton("Нет"){dialog, which ->
+                        dialog.dismiss()
 
+                    }
+                    show()
+                }
+                return@setOnLongClickListener true
+            }
         }
     }
 }

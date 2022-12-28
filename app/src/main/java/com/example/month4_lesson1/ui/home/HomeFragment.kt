@@ -1,17 +1,15 @@
 package com.example.month4_lesson1.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.month4_lesson1.App
 import com.example.month4_lesson1.R
 import com.example.month4_lesson1.databinding.FragmentHomeBinding
-import java.util.*
+
 
 
 class HomeFragment : Fragment() {
@@ -32,6 +30,8 @@ class HomeFragment : Fragment() {
 
         initViews()
         initListeners()
+        setHasOptionsMenu(true)
+
 
         return binding.root
     }
@@ -41,10 +41,37 @@ class HomeFragment : Fragment() {
         taskAdapter = TaskAdapter()
     }
 
+
+
+
     private fun initListeners() {
         binding.fabHome.setOnClickListener{
             findNavController().navigate(R.id.newTaskFragment)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.sort){
+            val items = arrayOf("По дате", "По алфавиту ")
+            val builder = AlertDialog.Builder(requireContext())
+            with(builder){
+                setTitle("Сортировать по:")
+                setItems(items){dialog, which ->
+                    when(which){
+                        0 ->{taskAdapter.addTasks(App.db.dao().getListByDate())}
+                        1 ->{taskAdapter.addTasks(App.db.dao().getListByAlphabet())}
+                    }
+                }
+                show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initViews() {
@@ -61,4 +88,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

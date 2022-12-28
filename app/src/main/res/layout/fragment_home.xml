@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    tools:menu="@menu/menu_home"
+    android:background="@color/back">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
@@ -20,10 +22,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/add_icon"
+        android:src="@drawable/add_task"
+
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/orange"
+        android:backgroundTint="@color/brown2"
 
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

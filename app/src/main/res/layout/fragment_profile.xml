@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment"
+    android:background="@color/back"
     >
 
 
@@ -32,7 +33,7 @@
         android:textSize="24sp"
         android:hint="Enter your name"
         android:textColorHint="@color/black"
-        app:boxStrokeColor="@color/orange"
+        app:boxStrokeColor="@color/black"
         android:layout_marginTop="50dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
