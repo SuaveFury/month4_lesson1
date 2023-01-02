@@ -52,9 +52,6 @@ class ProfileFragment : Fragment() {
 
         }
 
-
-
-
     private fun initListener() {
         binding.ivImage.setOnClickListener {
             mGetContent.launch("image/*")

@@ -30,9 +30,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.profile_fragment, R.id.newTaskFragment
             )
         )
-        if (Preference(applicationContext).isBoardingShowed()){
+
+//      navController.navigate(R.id.authFragment)
+       if (Preference(applicationContext).isBoardingShowed()){
             navController.navigate(R.id.navigation_home)
-        } else {
+       } else {
             navController.navigate(R.id.onBoardingFragment)
         }
 
@@ -41,12 +43,17 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
+        var list  = setOf(
+            R.id. newTaskFragment,
+            R.id.onBoardingFragment,
+            R.id.authFragment
+        )
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if (destination.id == R.id.newTaskFragment|| destination.id == R.id.onBoardingFragment){
+            if (list.contains(destination.id)){
                 navView.visibility = View.GONE
 
             }
-            if (destination.id == R.id.onBoardingFragment){
+            if (destination.id == R.id.onBoardingFragment  || destination.id == R.id.authFragment){
                 supportActionBar?.hide()
         }
             else navView.visibility = View.VISIBLE

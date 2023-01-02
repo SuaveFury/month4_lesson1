@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="24sp"
-        android:hint="Enter your name"
+        android:hint="@string/enter_your_name"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
         android:layout_marginTop="50dp"

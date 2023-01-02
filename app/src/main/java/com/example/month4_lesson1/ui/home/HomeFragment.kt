@@ -3,6 +3,8 @@ package com.example.month4_lesson1.ui.home
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,25 +26,17 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         initViews()
         initListeners()
         setHasOptionsMenu(true)
-
-
+        setData()
         return binding.root
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        taskAdapter = TaskAdapter()
+        taskAdapter = TaskAdapter(this::onClick,this:: onLongClick)
     }
-
-
-
 
     private fun initListeners() {
         binding.fabHome.setOnClickListener{
@@ -50,16 +44,41 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun onClick(pos: Int){
+        val task = taskAdapter.getTask(pos)
+        findNavController().navigate(R.id.newTaskFragment, bundleOf(EDIT_KEY to task))
+    }
+
+    private fun onLongClick(pos: Int){
+        val builder = AlertDialog.Builder(requireContext())
+        with(builder){
+            setTitle(getString(R.string.are_you_sure_delete))
+            setPositiveButton(getString(R.string.yes)){ dialog, _ ->
+                App.db.dao().deleteTask(taskAdapter.getTask(pos))
+                setData()
+                dialog.dismiss()
+
+            }
+            setNegativeButton(getString(R.string.no)){ dialog, which ->
+                dialog.dismiss()
+
+            }
+            show()
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.sort){
-            val items = arrayOf("По дате", "По алфавиту ")
+            val items = arrayOf(getString(R.string.by_date), getString(R.string.by_alphabet))
             val builder = AlertDialog.Builder(requireContext())
             with(builder){
-                setTitle("Сортировать по:")
+                setTitle(getString(R.string.sort_by))
                 setItems(items){dialog, which ->
                     when(which){
-                        0 ->{taskAdapter.addTasks(App.db.dao().getListByDate())}
-                        1 ->{taskAdapter.addTasks(App.db.dao().getListByAlphabet())}
+                        0 ->{taskAdapter.addTasks(App.db.dao().getListByDate())
+                        dialog.dismiss()}
+                        1 ->{taskAdapter.addTasks(App.db.dao().getListByAlphabet())
+                        dialog.dismiss()}
                     }
                 }
                 show()
@@ -79,15 +98,18 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = taskAdapter
         }
-        val listOfTasks = App.db.dao().getAllTasks()
-        taskAdapter.addTasks(listOfTasks)
         }
 
+    private fun setData(){
+        val listOfTasks = App.db.dao().getAllTasks()
+        taskAdapter.addTasks(listOfTasks)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
+    companion object{
+        const val EDIT_KEY: String = "edit"
+    }
 }

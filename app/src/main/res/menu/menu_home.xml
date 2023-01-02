@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
-    android:title="Sort"
+    android:title="@string/sort"
     android:id="@+id/sort"
     android:icon="@drawable/sort_vector"
     app:showAsAction="never"
