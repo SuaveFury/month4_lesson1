@@ -3,7 +3,7 @@ package com.example.month4_lesson1.ui.utils
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.net.Uri
+
 
 class Preference(private val context: Context) {
   private  val sharedPref: SharedPreferences = context.getSharedPreferences("prefences", MODE_PRIVATE)

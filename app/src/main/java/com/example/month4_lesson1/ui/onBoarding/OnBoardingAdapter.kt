@@ -1,16 +1,17 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.month4_lesson1.ui.onBoarding
 
-import androidx.core.graphics.toColor
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.month4_lesson1.R
 
-
+@Suppress("DEPRECATION", "DEPRECATION")
 class OnBoardingAdapter(fm: FragmentManager,
-var listenerSkip : () -> Unit,
-var listenerNext: () -> Unit) : FragmentStatePagerAdapter(fm){
+                        var listenerSkip : () -> Unit,
+                        var listenerNext: () -> Unit) : FragmentStatePagerAdapter(fm){
 
     private val listBoarding = arrayOf(OnBoard(R.drawable.ic_img1,
         "To-do list!",
@@ -28,9 +29,6 @@ var listenerNext: () -> Unit) : FragmentStatePagerAdapter(fm){
         "Your note with you at home, at work, even at the resort",
         true)
     )
-
-
-
     override fun getCount(): Int = listBoarding.size
 
     override fun getItem(position: Int): Fragment {
@@ -39,6 +37,4 @@ var listenerNext: () -> Unit) : FragmentStatePagerAdapter(fm){
         fragment.arguments = data
         return fragment
     }
-
-
 }

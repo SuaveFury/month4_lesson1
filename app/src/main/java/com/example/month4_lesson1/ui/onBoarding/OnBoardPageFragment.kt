@@ -20,49 +20,39 @@ class OnBoardPageFragment(
 
 private lateinit var binding: FragmentOnBoardPageBinding
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOnBoardPageBinding.inflate(LayoutInflater.from(context), container, false)
-
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initListeners()
-
     }
     private fun initViews(){
         arguments.let {
             val data  = it?.getSerializable("onBoard") as OnBoard
             binding.tvTitleBoard.text = data.title
             binding.tvDescBoard.text = data.description
-            data.image?.toInt()?.let { it1 -> binding.imageBoard.setImageResource(it1) }
+            data.image?.let { it1 -> binding.imageBoard.setImageResource(it1) }
             binding.btnSkip.isVisible = data.isLast == false
             binding.btnNext.isVisible = data.isLast == false
             binding.btnStart.isVisible = data.isLast == true
-
         }
     }
-
     private fun initListeners(){
         binding.btnNext.setOnClickListener {
             listenerNext.invoke()
         }
-
         binding.btnSkip.setOnClickListener {
            listenerSkip.invoke()
         }
-
         binding.btnStart.setOnClickListener{
             findNavController().navigate(R.id.navigation_home)
             Preference(requireContext()).setBoardingShowed(true)
         }
     }
-
 }

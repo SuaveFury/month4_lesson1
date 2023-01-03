@@ -3,7 +3,6 @@ package com.example.month4_lesson1.ui.home
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
-
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,15 +11,10 @@ import com.example.month4_lesson1.App
 import com.example.month4_lesson1.R
 import com.example.month4_lesson1.databinding.FragmentHomeBinding
 
-
-
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private lateinit var  taskAdapter: TaskAdapter
-
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +23,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         initViews()
         initListeners()
+        @Suppress("DEPRECATION")
         setHasOptionsMenu(true)
         setData()
         return binding.root
@@ -37,18 +32,15 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         taskAdapter = TaskAdapter(this::onClick,this:: onLongClick)
     }
-
     private fun initListeners() {
         binding.fabHome.setOnClickListener{
             findNavController().navigate(R.id.newTaskFragment)
         }
     }
-
     private fun onClick(pos: Int){
         val task = taskAdapter.getTask(pos)
         findNavController().navigate(R.id.newTaskFragment, bundleOf(EDIT_KEY to task))
     }
-
     private fun onLongClick(pos: Int){
         val builder = AlertDialog.Builder(requireContext())
         with(builder){
@@ -57,16 +49,13 @@ class HomeFragment : Fragment() {
                 App.db.dao().deleteTask(taskAdapter.getTask(pos))
                 setData()
                 dialog.dismiss()
-
             }
             setNegativeButton(getString(R.string.no)){ dialog, which ->
                 dialog.dismiss()
-
             }
             show()
         }
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.sort){
             val items = arrayOf(getString(R.string.by_date), getString(R.string.by_alphabet))
@@ -84,27 +73,24 @@ class HomeFragment : Fragment() {
                 show()
             }
         }
+        @Suppress("DEPRECATION")
         return super.onOptionsItemSelected(item)
-
     }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_home, menu)
+        @Suppress("DEPRECATION")
         super.onCreateOptionsMenu(menu, inflater)
     }
-
     private fun initViews() {
         binding.rvHome.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = taskAdapter
         }
         }
-
     private fun setData(){
         val listOfTasks = App.db.dao().getAllTasks()
         taskAdapter.addTasks(listOfTasks)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

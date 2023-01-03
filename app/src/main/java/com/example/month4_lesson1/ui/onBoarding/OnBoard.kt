@@ -1,7 +1,6 @@
 package com.example.month4_lesson1.ui.onBoarding
 
 
-import android.graphics.Color
 import java.io.Serializable
 
 data class OnBoard(
