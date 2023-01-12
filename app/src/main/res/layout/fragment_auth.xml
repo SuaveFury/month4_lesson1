@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@color/back"
-    tools:context=".auth.AuthFragment">
+    tools:context=".ui.auth.AuthFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             app:lottie_rawRes="@raw/animation2"
             />
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_layout_title"
+            android:id="@+id/et_layout_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone_number"
@@ -45,14 +45,48 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save"
+        <com.google.android.material.textfield.TextInputLayout
+            android:visibility="gone"
+            android:id="@+id/et_layout_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/et_layout_title"
+            android:hint="@string/enter_code"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginTop="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/animationView"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_code"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_layout_phone"
             android:layout_marginTop="20dp"
             android:text="@string/send"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingVertical="12dp"
+            app:cornerRadius="12dp"
+            android:backgroundTint="@color/black"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_layout_code"
+            android:layout_marginTop="20dp"
+            android:text="@string/confirm"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textSize="20sp"

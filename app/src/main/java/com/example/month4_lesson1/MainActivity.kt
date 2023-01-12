@@ -1,6 +1,7 @@
 package com.example.month4_lesson1
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +11,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.month4_lesson1.databinding.ActivityMainBinding
 import com.example.month4_lesson1.ui.utils.Preference
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var auth = FirebaseAuth.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener{
+            Log.e("ololo", "onCreate: "+it.result )
+        }
 
         val navView: BottomNavigationView = binding.navView
 
@@ -32,11 +41,13 @@ class MainActivity : AppCompatActivity() {
         )
 
 //      navController.navigate(R.id.authFragment)
-       if (Preference(applicationContext).isBoardingShowed()){
-            navController.navigate(R.id.navigation_home)
-       } else {
-            navController.navigate(R.id.onBoardingFragment)
-        }
+       if (!Preference(applicationContext).isBoardingShowed()){
+            navController.navigate(R.id.onBoardingFragment)}
+         else if(auth.currentUser == null){
+           navController.navigate(R.id.authFragment)
+       }
+
+
 
 
         setupActionBarWithNavController(navController, appBarConfiguration)

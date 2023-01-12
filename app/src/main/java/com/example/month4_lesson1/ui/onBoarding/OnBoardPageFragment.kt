@@ -11,6 +11,7 @@ import com.example.month4_lesson1.R
 
 import com.example.month4_lesson1.databinding.FragmentOnBoardPageBinding
 import com.example.month4_lesson1.ui.utils.Preference
+import com.google.firebase.auth.FirebaseAuth
 
 
 class OnBoardPageFragment(
@@ -19,6 +20,7 @@ class OnBoardPageFragment(
 ) : Fragment() {
 
 private lateinit var binding: FragmentOnBoardPageBinding
+private var auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +53,11 @@ private lateinit var binding: FragmentOnBoardPageBinding
            listenerSkip.invoke()
         }
         binding.btnStart.setOnClickListener{
-            findNavController().navigate(R.id.navigation_home)
+            if (auth.currentUser != null){
+                findNavController().navigate(R.id.navigation_home)
+            } else {
+                findNavController().navigate(R.id.authFragment)
+            }
             Preference(requireContext()).setBoardingShowed(true)
         }
     }

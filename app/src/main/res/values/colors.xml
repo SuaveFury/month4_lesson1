@@ -10,9 +10,10 @@
     <color name="orange">#FF5722</color>
     <color name="back">#DAD3C8</color>
     <color name="blue">#2196F3</color>
-    <color name="grey">#3E3D3D</color>
+    <color name="grey">#737070</color>
     <color name="brown">#3D3009</color>
     <color name="brown2">#594713</color>
     <color name="brown_btn">#E1AF67</color>
     <color name="back2">#928571</color>
+    <color name="red">#FF0000</color>
 </resources>

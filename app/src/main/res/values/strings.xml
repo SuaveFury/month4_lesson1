@@ -24,5 +24,8 @@
     <string name="skip">SKIP</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="sort">Sort</string>
+    <string name="enter_phone_num">Введите номер телефона</string>
+    <string name="enter_code">Enter code</string>
+    <string name="confirm">Confirm</string>
 
 </resources>

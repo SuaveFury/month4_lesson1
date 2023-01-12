@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_on_boarding" />
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.month4_lesson1.auth.AuthFragment"
+        android:name="com.example.month4_lesson1.ui.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
 
