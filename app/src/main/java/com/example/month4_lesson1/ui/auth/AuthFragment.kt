@@ -11,8 +11,8 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.month4_lesson1.databinding.FragmentAuthBinding
 import com.example.month4_lesson1.ui.utils.showToast
+import com.fraggjkee.smsconfirmationview.SmsConfirmationView
 import com.google.firebase.FirebaseException
-import com.google.firebase.R
 import com.google.firebase.auth.*
 import java.util.concurrent.TimeUnit
 
@@ -43,6 +43,10 @@ class AuthFragment : Fragment() {
             binding.btnConfirm.setOnClickListener{
                 sendCode()
             }
+            binding.smsCodeView.onChangeListener = SmsConfirmationView.OnChangeListener { code, isComplete ->
+
+            }
+            binding.smsCodeView.startListeningForIncomingMessages()
         }
     }
 
@@ -66,7 +70,7 @@ class AuthFragment : Fragment() {
                     binding.etLayoutPhone.isVisible = false
                     binding.btnSend.isVisible = false
 
-                    binding.etLayoutCode.isVisible = true
+                    binding.smsCodeView.isVisible = true
                     binding.btnConfirm.isVisible = true
 
                     Log.e("ololo" , "Correct code: $verificationCode")
@@ -80,7 +84,7 @@ class AuthFragment : Fragment() {
 
     private fun sendCode(){
         val credential =
-            correctCode?.let { it1 -> PhoneAuthProvider.getCredential(it1, binding.etCode.text.toString()) }
+            correctCode?.let { it1 -> PhoneAuthProvider.getCredential(it1, binding.smsCodeView.toString()) }
         if (credential != null) {
             signInWithPhoneAuthCredential(credential)
         }
